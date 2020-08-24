@@ -1,0 +1,89 @@
+
+/* container Div */
+.container{
+  display: flex;
+  align-content:center;
+  justify-content: center;
+}
+
+/* game container */
+#game{
+  width:400px;
+  height:400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid red;
+}
+/* the window div */
+.game-square {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Drawer window direct descendant of game-square */
+.game-square > div{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+/* default and color div */
+.game-square > div > div{
+    height: 50%;
+}
+
+/* the default square gets a color */
+.game-square > div > div:first-child{
+    background-color:#4D4D4D;
+}
+
+.flip > div{
+    top : -100%;
+}
+
+
+.square-0 {
+    background-color: aqua;
+  }
+  
+  .square-1 {
+    background-color: bisque;
+  }
+  
+  .square-2 {
+    background-color: blue;
+  }
+  
+  .square-3 {
+    background-color: blueviolet;
+  }
+  
+  .square-4 {
+    background-color: brown;
+  }
+  
+  .square-5 {
+    background-color: cadetblue;
+  }
+  
+  .square-6 {
+    background-color: chartreuse;
+  }
+  
+  .square-7 {
+    background-color: chocolate;
+  }
+  
+  .square-8 {
+    background-color: coral;
+  }
+  
+  .square-9 {
+    background-color: cornflowerblue;
+  }
