@@ -1,3 +1,8 @@
+/* keeping track of the first square you clicked on */
+
+let firstSquare = null;
+
+
 const resetButton = document.getElementById('reset-button');
 const colors = [];
 for (let i = 0; i < 10; i++) {
@@ -22,8 +27,11 @@ GameSquare.prototype.handleEvent = function (e) {
             }
             this.isOpen = true;
             this.el.classList.add('flip');
+            checkGame(this);
     }
 }
+
+
 
 
 
@@ -60,8 +68,12 @@ const gameSquares = [];
 /* set the game up  */
 function setupGame() {
     const gameElemsArr = document.getElementsByClassName('game-square');
+    let randomColors = getSomeColors();
     for (let i = 0; i < gameElemsArr.length; i++) {
-        gameSquares.push(new GameSquare(gameElemsArr[i], colors[0]));
+        /* get a random color */
+        let randomColorIndex = random(randomColors.length);
+        let randomColor = randomColors.splice(randomColorIndex, 1)[0];
+        gameSquares.push(new GameSquare(gameElemsArr[i], randomColor));
     }
 };
 
@@ -81,4 +93,49 @@ function getSomeColors() {
         randomColors.push(colorsCopy.splice(index, 1)[0]);
     }
     return randomColors.concat(randomColors.slice());
+}
+
+
+/* game logic */
+function checkGame(gameSquare) {
+    if (firstSquare === null) {
+        firstSquare = gameSquare;
+        return;
+    }
+
+    if (firstSquare.color === gameSquare.color) {
+        firstSquare.lock();
+        gameSquare.lock();
+    } else {
+        let a = firstSquare;
+        let b = gameSquare;
+        setTimeout(() => {
+            a.reset();
+            b.reset();
+            firstSquare = null;
+        }, 400);
+        firstSquare = null;
+    }
+
+
+}
+
+/* reset colors */
+
+function randomizeColors() {
+    let randomColors = getSomeColors();
+    gameSquares.forEach(function (gameSquare) {
+        let color = randomColors.splice(random(randomColors.length, 1)[0]);
+        gameSquare.setColor(color);
+    });
+}
+/* clear game */
+
+function clearGame() {
+    gameSquares.forEach(function (gameSquare) {
+        gameSquare.reset();
+    });
+    setTimeout(function () {
+        randomizeColors();
+    }, 500);
 }
