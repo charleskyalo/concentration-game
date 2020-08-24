@@ -1,6 +1,5 @@
 /* keeping track of the first square you clicked on */
 
-let firstSquare = null;
 
 
 const resetButton = document.getElementById('reset-button');
@@ -8,7 +7,7 @@ const colors = [];
 for (let i = 0; i < 10; i++) {
     colors.push('square-' + i);
 }
-console.log(colors);
+
 
 function GameSquare(el, color) {
     this.el = el;
@@ -23,7 +22,7 @@ GameSquare.prototype.handleEvent = function (e) {
     switch (e.type) {
         case "click":
             if (this.isOpen || this.isLocked) {
-                return
+                return;
             }
             this.isOpen = true;
             this.el.classList.add('flip');
@@ -32,19 +31,15 @@ GameSquare.prototype.handleEvent = function (e) {
 }
 
 
-
-
-
 /* reset game */
-
-
-
 
 GameSquare.prototype.reset = function () {
     this.isOpen = false;
     this.isLocked = false;
     this.el.classList.remove('flip');
 }
+
+/* lock the game */
 
 GameSquare.prototype.lock = function () {
     this.islocked = true;
@@ -72,12 +67,10 @@ function setupGame() {
     for (let i = 0; i < gameElemsArr.length; i++) {
         /* get a random color */
         let randomColorIndex = random(randomColors.length);
-        let randomColor = randomColors.splice(randomColorIndex, 1)[0];
-        gameSquares.push(new GameSquare(gameElemsArr[i], randomColor));
+        let color = randomColors.splice(randomColorIndex, 1)[0];
+        gameSquares.push(new GameSquare(gameElemsArr[i], color));
     }
 };
-
-setupGame();
 
 
 /* randomize the colors */
@@ -86,8 +79,8 @@ function random(n) {
 }
 
 function getSomeColors() {
-    const colorsCopy = colors.slice();
-    const randomColors = [];
+    let colorsCopy = colors.slice();
+    let randomColors = [];
     for (let i = 0; i < 8; i++) {
         let index = random(colorsCopy.length);
         randomColors.push(colorsCopy.splice(index, 1)[0]);
@@ -97,6 +90,8 @@ function getSomeColors() {
 
 
 /* game logic */
+let firstSquare = null;
+
 function checkGame(gameSquare) {
     if (firstSquare === null) {
         firstSquare = gameSquare;
@@ -114,10 +109,9 @@ function checkGame(gameSquare) {
             b.reset();
             firstSquare = null;
         }, 400);
-        firstSquare = null;
+
     }
-
-
+    firstSquare = null;
 }
 
 /* reset colors */
@@ -139,3 +133,5 @@ function clearGame() {
         randomizeColors();
     }, 500);
 }
+resetButton.addEventListener("click", clearGame);
+setupGame();
