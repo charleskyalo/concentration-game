@@ -2,7 +2,10 @@
 *{
   box-sizing: border-box;
 }
-
+body {
+background-image:url('imgs/nasa1.jpg');
+background-size:cover;
+}
  /* container Div */
  .container{
    margin-top:50px;
