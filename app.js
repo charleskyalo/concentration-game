@@ -1,6 +1,18 @@
 /* keeping track of the first square you clicked on */
 
 
+/*change background  randomly and assign it */
+
+const body = document.getElementById('bd');
+const images = ["imgs/nasa1.jpg", "imgs/nasa2.jpg", "imgs/nasa3.jpg"];
+
+
+function randomBackground() {
+    let randomImgIndex = random(images.length);
+    let randomImg = images[randomImgIndex];
+    let randomImgUrl = `url('${randomImg}')`;
+    return body.style.backgroundImage = `${randomImgUrl}`;
+}
 
 const resetButton = document.getElementById('reset-button');
 const colors = [];
@@ -134,4 +146,5 @@ function clearGame() {
     }, 500);
 }
 resetButton.addEventListener("click", clearGame);
+randomBackground();
 setupGame();
