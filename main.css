@@ -3,8 +3,8 @@
   box-sizing: border-box;
 }
 body {
-background-image:url('imgs/nasa1.jpg');
-background-size:cover;
+ background:url('imgs/darkbg.png');
+ background-repeat:repeat;
 }
  /* container Div */
  .container{
