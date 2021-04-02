@@ -1,5 +1,6 @@
-# Concentration Game Tutorial
+# Concentration Game 
 
+## [project live link](https://charleskyalo.github.io/concentration-game/)
 
 # concentration game is a card  game also known as <b>Match Match</b> ,<b>Pelmanism</b>,<b>Pexeso</b>,<b>Pairs</b>.
 
